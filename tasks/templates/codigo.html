@@ -1,0 +1,499 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Estilo para el contenedor del código */
+        .code-container {
+            background-color: #272822;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            position: relative;
+            overflow-x: auto;
+            border: 2px solid #3e3d32;
+        }
+
+        /* Estilo para el botón de copiar */
+        .copy-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #3e3d32;
+            color: #f8f8f2;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Estilo para el botón de copiar cuando está activo */
+        .copy-button.active {
+            background-color: #4caf50;
+        }
+
+        /* Estilo para el icono del botón de copiar */
+        .copy-button i {
+            margin-right: 5px;
+        }
+
+        /* Estilo para el título del código */
+        .code-title {
+            color: #4caf50;
+            font-size: 18px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #4caf50;
+            padding-bottom: 5px;
+        }
+
+        /* Estilo para el mensaje de copiado */
+        .copy-message {
+            color: #4caf50;
+            display: none;
+        }
+    </style>
+        <style>
+            /* Estilo para el contenedor de objetivos */
+            .objetivos-container {
+                background-color: #f0f0f0;
+                border-radius: 10px;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+    
+            /* Estilo para la lista de objetivos */
+            .objetivos-list {
+                list-style-type: none;
+                padding-left: 20px;
+                font-size: 18px;
+            }
+    
+            /* Estilo para los íconos de la lista */
+            .objetivos-list i {
+                margin-right: 10px;
+                color: #007bff;
+            }
+
+            /* Estilo para el subelemento */
+            .sub-item {
+                background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fm.facebook.com%2FProfeLugo%2Fphotos%2Finauguramos-la-entrega-de-trabajos-finales-%25C3%25A9xito-a-mis-alumnes-siempre-pensemos-%2F214332540345043%2F%3Flocale%3Dhi_IN&psig=AOvVaw1mrJsyglTLSKxVTRu9jjM9&ust=1717158851815000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJCywLKxtYYDFQAAAAAdAAAAABAQ');
+                background-size: cover;
+                border-radius: 5px;
+            }
+
+            .code-container pre {
+                margin: 0; /* Elimina el margen */
+                padding: 0; /* Elimina el relleno */
+                text-align: left; /* Alinea el texto a la izquierda */
+            }
+        </style>
+{% endblock %}
+
+{% block content %}
+
+
+
+<main class="container py-5">
+    <section class="card card-body">
+        <h1 class="display-1 text-center">Big Data App</h1>
+        <p>
+            Maestría en Analítica de Datos <br>
+            Curso de Big Data<br>
+            Semestre: 202401
+        </p>
+    </section>    
+    <br>
+    <div class="objetivos-container">
+        <h2>Objetivos</h2>
+        <ul class="objetivos-list">
+            <li><i class="fas fa-check-circle"></i> Desarrollar las habilidades básicas en la manipulación de datos semiestructurados.</li>
+            <li><i class="fas fa-check-circle"></i> Realizar una práctica en el manejo de bases de datos NoSQL.</li>
+        </ul>
+    </div>
+    <br>
+    <div class="objetivos-container">
+        <h2>Prerrequisitos</h2>
+        <ul class="objetivos-list">
+            <li><i class="fas fa-check-circle"></i> Disponibilidad de python.</li>
+            <li><i class="fas fa-check-circle"></i> Disponibilidad de un dataset pdf con audios.</li>
+        </ul>
+    </div>
+    <br>
+    <div class="objetivos-container">
+        <h2>Herramientas</h2>
+        <ul class="objetivos-list">
+            <li><i class="fas fa-check-circle"></i> Visual studio code.</li>
+            <li><i class="fas fa-check-circle"></i> Datasets de relatoría(MongoDB).</li>
+            <li><i class="fas fa-check-circle"></i> MongoDB.</li>
+            <li><i class="fas fa-check-circle"></i> python.</li>
+        </ul>
+    </div>
+    <br>
+    <div class="objetivos-container">
+        <h2>Enunciado</h2>
+        <ul class="objetivos-list">
+            <li><i class="fas fa-check-circle"></i> Entendimiento del proyecto y de los datos.
+                <ul class="objetivos-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i> Revise el dataset provisto para el proyecto, comprenda la estructura de los datos y su contenido.
+                    </li>
+                </ul>
+            </li>
+
+            <li><i class="fas fa-check-circle"></i> El tipo de la providencia depende del nombre de la providencia.
+                <ul class="objetivos-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i> Si comienza con C el tipo es Constitucionalidad.
+                    </li>
+                    <li class="sub-item">                        
+                        <i class="fas fa-check-circle"></i> Si comienza con A el tipo es Auto
+                    </li>
+                    <li class="sub-item">                        
+                        <i class="fas fa-check-circle"></i> Si comienza con T el tipo es Tutela.
+                    </li>
+                </ul>
+            </li>
+
+            <li><i class="fas fa-check-circle"></i> Manipulando datos semiestructurados.
+                <ul class="objetivos-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i> A) (20%) Cree una funcionalidad en python que permita extraer los textos de los archivos .wav entregados para el proyecto.
+                        <div class="code-container" >
+                            <button class="copy-button" onclick="copyCode()">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="code-title">Python</div>
+                            <pre><code class="language-python">
+# Instalamos las librerias que vamos a usar
+!pip install pydub gdown dask librosa speechrecognition
+!apt-get install -y ffmpeg
+!pip install pymongo
+                                </code>
+                            </pre>
+                            <div class="copy-message" id="copyMessage">Código copiado al portapapeles.</div>
+                        </div>
+                        <div class="code-container" >
+                            <button class="copy-button" onclick="copyCode()">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="code-title">Python</div>
+                            <pre><code class="language-python">
+import os
+import gdown
+
+# URL de la carpeta de Google Drive pública
+drive_folder_url = 'https://drive.google.com/drive/folders/1_OBCbXYV59SvlcWsn7PFDFzLTqRlNpGM?usp=sharing'
+
+# Convertir la URL de la carpeta a una URL exportable
+folder_id = drive_folder_url.split('/')[-1]
+gdrive_api_url = f"https://drive.google.com/drive/u/0/folders/{folder_id}"
+
+# Comando para descargar la carpeta completa
+!gdown --folder {gdrive_api_url} -O /content/audio_files
+
+# Ruta a la carpeta descargada
+audio_folder_path = '/content/audio_files'
+
+# Listar los archivos descargados
+audio_files = [os.path.join(audio_folder_path, f) for f in os.listdir(audio_folder_path) if f.endswith('.wav')]
+print(audio_files)
+                                </code>
+                            </pre>
+                            <div class="copy-message" id="copyMessage">Código copiado al portapapeles.</div>
+                        </div>      
+                        <div class="code-container" >
+                            <button class="copy-button" onclick="copyCode()">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="code-title">Python</div>
+                            <pre><code class="language-python"> 
+import os
+import dask
+import re
+from dask.distributed import Client
+from pydub import AudioSegment
+import speech_recognition as sr
+
+def dividir_audio(path, duracion_segmento_ms):
+    audio = AudioSegment.from_file(path)
+    duracion_total = len(audio)
+    segmentos = []
+    for i in range(0, duracion_total, duracion_segmento_ms):
+        segmentos.append(audio[i:i + duracion_segmento_ms])
+    return segmentos
+
+def reconocer_audio(segmento):
+    r = sr.Recognizer()
+    with sr.AudioFile(segmento) as source:
+        audio = r.record(source)
+    try:
+        texto = r.recognize_google(audio, language='es-CO')
+        return texto.lower()
+    except sr.UnknownValueError:
+        return "Google Speech Recognition no pudo entender el audio"
+    except sr.RequestError as e:
+        return f"No se pudo solicitar resultados de Google Speech Recognition; {e}"
+
+def guardar_segmentos(segmentos, directorio):
+    if not os.path.exists(directorio):
+        os.makedirs(directorio)
+    rutas_segmentos = []
+    for i, segmento in enumerate(segmentos):
+        ruta_segmento = os.path.join(directorio, f"segmento_{i}.wav")
+        segmento.export(ruta_segmento, format="wav")
+        rutas_segmentos.append(ruta_segmento)
+    return rutas_segmentos
+
+def transcribir_segmento(segmento):
+    texto_segmento = reconocer_audio(segmento)
+    os.remove(segmento)  # Eliminar el segmento temporal después de procesarlo
+    return texto_segmento
+
+def transcribir_audio(path, duracion_segmento_ms=30000, directorio_segmentos="segmentos_temp"):
+    # Dividir el audio en segmentos
+    segmentos = dividir_audio(path, duracion_segmento_ms)
+    rutas_segmentos = guardar_segmentos(segmentos, directorio_segmentos)
+
+    # Configurar cliente Dask
+    client = Client()
+
+    # Procesar los segmentos en paralelo con Dask
+    resultados = [dask.delayed(transcribir_segmento)(ruta) for ruta in rutas_segmentos]
+    texto_completo = dask.compute(*resultados)
+
+    # Cerrar el cliente Dask
+    client.close()
+
+    return ' '.join(texto_completo)
+
+def limpiar_texto(texto):
+    # Eliminar signos de puntuación y otros caracteres no deseados
+    texto_limpio = re.sub(r'[^\w\s]', '', texto)
+    # Convertir el texto a minúsculas
+    texto_limpio = texto_limpio.lower()
+    # Eliminar espacios en blanco adicionales
+    texto_limpio = ' '.join(texto_limpio.split())
+    return texto_limpio
+                                </code>
+                            </pre>
+                            <div class="copy-message" id="copyMessage">Código copiado al portapapeles.</div>
+                        </div>                     
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i> B) (10%) Cree una base de datos en mongodb que permita almacenar un documento que contenga la siguiente información.<br>
+                            <pre>
+                            {
+                                "NombreProvidencia": "C-411-22",
+                                "Tipo": "Constitucionalidad",
+                                “AnoPublicacion” : “2024”,
+                                "Texto": "Text extraído de los audios " ,
+                                "FechaPublicacion": "2023-04-27"
+                            }
+                        </pre>
+                        <div class="code-container" >
+                            <button class="copy-button" onclick="copyCode()">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="code-title">Python</div>
+                            <pre><code class="language-python">
+import os
+from pymongo import MongoClient
+import datetime
+
+def guardar_en_mongodb(nombre_providencia, tipo, texto, ano_publicacion):
+    client = MongoClient('mongodb+srv://user:Admin456@atlascluster.fgujvv6.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster')  # Cambia la URI según tu configuración
+    db = client['DB_final']
+    coleccion = db['documentos']
+
+    documento = {
+        "NombreProvidencia": nombre_providencia,
+        "Tipo": tipo,
+        "AnoPublicacion": ano_publicacion,
+        "Texto": texto,
+        "FechaPublicacion": datetime.date.today().strftime("%Y-%m-%d")
+    }
+
+    coleccion.insert_one(documento)
+    print(f"Documento guardado en MongoDB: {documento}")
+                                </code>
+                            </pre>
+                            <div class="copy-message" id="copyMessage">Código copiado al portapapeles.</div>
+                        </div>             
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>C) (10%) Cree una funcionalidad que permita cargar el texto de las sentencias a la colección de mongo.<br>
+                        <div class="code-container" >
+                            <button class="copy-button" onclick="copyCode()">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="code-title">Python</div>
+                            <pre><code class="language-python">
+import os
+from pymongo import MongoClient
+import datetime
+# Ajustamos la funcion guardar en mongo para insertar el documento uno a uno
+def guardar_en_mongodb(nombre_providencia, tipo, texto, ano_publicacion):
+    coleccion.insert_one(documento)
+    print(f"Documento guardado en MongoDB: {documento}")
+
+def obtener_tipo_providencia(nombre_providencia):
+    if nombre_providencia.startswith('C'):
+        return "Constitucionalidad"
+    elif nombre_providencia.startswith('A'):
+        return "Auto"
+    elif nombre_providencia.startswith('T'):
+        return "Tutela"
+    else:
+        return "Desconocido"
+
+def obtener_ano_publicacion(nombre_providencia):
+    # Extraer los dos últimos dígitos del nombre de la providencia y convertirlos en año
+    ano = nombre_providencia.split('-')[-1][:2]
+    return "20" + ano
+
+    def main():
+    ruta_audio = '/content/audio_files/A553-24.wav'
+    nombre_providencia = os.path.basename(ruta_audio).split('.')[0]
+    tipo = obtener_tipo_providencia(nombre_providencia)
+    ano_publicacion = obtener_ano_publicacion(nombre_providencia)
+
+    texto_transcrito = transcribir_audio(ruta_audio)
+    texto_limpio = limpiar_texto(texto_transcrito)
+
+    guardar_en_mongodb(nombre_providencia, tipo, texto_limpio, ano_publicacion)
+    print("Transcripción y almacenamiento completados.")
+
+if __name__ == "__main__":
+    main()
+                                </code>
+                            </pre>
+                            <div class="copy-message" id="copyMessage">Código copiado al portapapeles.</div>
+                        </div>             
+                    </li>
+                    <li><i class="fas fa-check-circle"></i>D) (35%) Cree una aplicación web que permita realizar consultas sobre la colección de mongo creada. Se evaluarán las siguientes búsquedas:
+                        <ul class="objetivos-list">
+                            <li class="sub-item">
+                                <i class="fas fa-check-circle"></i> Consultar por el nombre de una providencia.
+                            </li>
+                            <li class="sub-item">                        
+                                <i class="fas fa-check-circle"></i> Consultar las sentencias por Tipo.
+                            </li>
+                            <li class="sub-item">                        
+                                <i class="fas fa-check-circle"></i> Consultar por un año especifico.
+                            </li>
+                            <li class="sub-item">                        
+                                <i class="fas fa-check-circle"></i> Consultar que providencias existen por un rango de fecha de publicación especifico.
+                            </li>
+                            <li class="sub-item">                        
+                                <i class="fas fa-check-circle"></i> Consultar una providencia por cualquier texto (se debe crear un índice de texto).
+                            </li>
+                        </ul>
+                    </li> 
+                    <li><i class="fas fa-check-circle"></i>E) (25%) Realizar una agregación que permita realizar:
+                        <ul class="objetivos-list">
+                            <li class="sub-item">
+                                <i class="fas fa-check-circle"></i> Un conteo de providencias por todos los años publicados.
+                            </li>
+                            <li class="sub-item">                        
+                                <i class="fas fa-check-circle"></i> Un conteo de providencias por el tipo de providencia de acuerdo con un año especifico
+                            </li>
+                        </ul>
+                    </li> 
+                </ul>
+            </li>            
+        </ul>
+    </div>
+    <br>
+
+    <div class="objetivos-container">
+        <h2>Metodología</h2>
+        <ul class="objetivos-list">
+            <li><i class="fas fa-check-circle"></i> El proyecto se desarrolla en los grupos de estudiantes que están previstos para el desarrollo de trabajos prácticos.
+                <ul class="objetivos-list">
+                    <li class="sub-item">
+                        <i class="fas fa-check-circle"></i> Oscar Mauricio Rios Munevar                         
+                    </li>
+                    <li class="sub-item">                        
+                        <i class="fas fa-check-circle"></i> Camilo Andres Alarcon Camargo                        
+                    </li>
+                    <li class="sub-item">                        
+                        <i class="fas fa-check-circle"></i> Juan Salazar Saenz
+                    </li>
+                </ul>
+            </li>            
+            <li><i class="fas fa-check-circle"></i> Se espera una participación equitativa de los integrantes del grupo.
+                <ul class="objetivos-list">
+                    <li class="sub-item">
+                        <i class="fas fa-check-circle"></i> El mejor equipo del mundo mundial
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div class="objetivos-container">
+        <h2>Entrega de taller</h2>
+        <ul class="objetivos-list">
+            <li><i class="fas fa-check-circle"></i> Ultima sesión planeada a la clase.
+                <ul class="objetivos-list">   
+                    <li class="sub-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div style="border: 2px solid green; display: inline-block; border-radius: 7px;">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                              <title>Producto #1</title>
+                              <image href="../static/images.jpg" width="100%" height="100%" preserveAspectRatio="none" />
+                              <rect class="opacity-25" width="100%" height="100%" rx="5" ry="5" fill="var(--bs-secondary-bg)"/>
+                              <text x="50%" y="50%" fill="#eceeef" dy=".3em">Producto #1</text>
+                            </svg>
+                          </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script>
+        // Función para copiar el código al portapapeles
+        function copyCode() {
+            var code = document.querySelector('.code-container code');
+            var range = document.createRange();
+            range.selectNode(code);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+    
+            // Mostrar el mensaje de copiado
+            var copyMessage = document.getElementById('copyMessage');
+            copyMessage.style.display = 'block';
+    
+            // Cambiar el estilo del botón de copiar
+            var copyButton = document.querySelector('.copy-button');
+            copyButton.classList.add('active');
+    
+            // Cambiar el ícono del botón de copiar
+            var icon = document.querySelector('.copy-button i');
+            icon.classList.remove('far', 'fa-copy');
+            icon.classList.add('fas', 'fa-check');
+    
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(function() {
+                copyMessage.style.display = 'none';
+                copyButton.classList.remove('active');
+                icon.classList.remove('fas', 'fa-check');
+                icon.classList.add('far', 'fa-copy');
+            }, 3000);
+        }
+    </script>
+    <!-- Incluye FontAwesome para los íconos -->
+    
+
+
+
+
+</main>
+{% endblock %}

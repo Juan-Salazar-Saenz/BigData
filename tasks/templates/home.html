@@ -3,8 +3,18 @@
 {% block content %}
 <main class="container py-5">
     <section class="card card-body">
-        <h1 class="display-1 text-center">Django App</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus voluptatibus provident, tenetur hic laboriosam quos doloribus odit tempora voluptatem omnis excepturi quia fugiat distinctio accusantium saepe quae! A, veritatis rem.</p>
+        <h1 class="display-1 text-center">Big Data Project App</h1><br>
+        <p>
+            En el ámbito legal, la gestión eficiente de la información es fundamental para el correcto funcionamiento de los sistemas judiciales y administrativos. En este contexto, MongoDB ofrece una solución versátil y escalable para el almacenamiento y la consulta de datos. Este proyecto se centra en el desarrollo de una base de datos MongoDB destinada a almacenar información relevante sobre providencias judiciales.
+            <br><br>
+            La estructura de los documentos en esta base de datos está diseñada para capturar de manera exhaustiva los detalles esenciales de cada providencia. Cada documento contiene atributos como el nombre de la providencia, su tipo, el año de publicación, el texto extraído de los audios correspondientes y la fecha de publicación. Este enfoque garantiza que la información esté organizada de manera coherente y accesible para su análisis y consulta.
+            <br><br>
+            La implementación de esta base de datos implica varias etapas clave. En primer lugar, se desarrollará una funcionalidad para cargar el texto de las sentencias a la colección de MongoDB. Esto permitirá ingresar nuevos documentos de manera eficiente y precisa.
+            <br><br>
+            Posteriormente, se creará una aplicación web que ofrecerá una interfaz intuitiva para realizar consultas sobre la colección de MongoDB. Los usuarios podrán buscar providencias por nombre, tipo, año de publicación y rango de fechas, así como realizar búsquedas de texto libre gracias a la creación de un índice de texto.
+            <br><br>
+            Finalmente, se implementará una agregación que permitirá realizar análisis estadísticos sobre los datos almacenados. Esto incluirá el conteo de providencias por año y por tipo de providencia, lo que proporcionará información valiosa para comprender mejor la distribución y la evolución de las decisiones judiciales a lo largo del tiempo.
+        </p>
         <div class="text-center">
             <a href="/signin/" class="btn btn-secondary">Signin</a>
             <a href="/signup/" class="btn btn-dark">Signup</a>

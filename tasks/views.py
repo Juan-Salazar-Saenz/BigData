@@ -100,3 +100,7 @@ def signin(request):
         else:
             login(request, user)
             return redirect('tasks')
+        
+@login_required
+def codigo(request):
+    return render(request, 'codigo.html')    
