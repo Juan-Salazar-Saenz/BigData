@@ -30,6 +30,10 @@ urlpatterns = [
     path('tasks/<int:task_id>/delete', views.delete_task ,name='delete_tasks'),
     path('logout/', views.signout ,name='logout'),
     path('signin/', views.signin ,name='signin'),
-    path('codigo/', views.codigo ,name='codigo')
+    path('codigo/', views.codigo ,name='codigo'),
+    path('cargartipo/', views.CargarTipo , name='cargartipo'),
+    path('cargarfecha/', views.CargarFechaPublicacion , name='cargarfecha'),
+    path('cargarprovincia/', views.CargarProvincia , name='cargarprovincia'),
+    path('cargarconsulta/', views.CargarConsulta , name='cargarconsulta'),
 ]
 

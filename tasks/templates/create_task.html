@@ -1,9 +1,82 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <main class="container">
     <div class="row">
-        <div class="col-md-4 offset-md-4 mt-5">            
+        <div class="col-md-12 mt-5">
+            <div class="card card-body">
+            <!-- Combo boxes en línea -->
+                <div class="d-flex justify-content-between mb-3">
+                    <!-- Primer combo box -->
+                    <label for="AnoPublicacion" class="col-sm-3 col-form-label">Año Publicacion</label>
+                    <label for="Tipo" class="col-sm-3 col-form-label">Tipo </label>                    
+                    <label for="FechaPublicacion" class="col-sm-3 col-form-label">Fecha publicacion</label>
+                    <label for="NombreProvidencia" class="col-sm-3 col-form-label">Nombre Providencia</label>                
+                </div>
+            <!-- Combo boxes en línea -->
+                <div class="d-flex justify-content-between mb-3">
+                    <!-- Primer combo box -->
+                    <select class="form-control" id="AnoPublicacion" name="AnoPublicacion">
+                        {% for choice in anos %}
+                            <option value="{{ choice }}">{{ choice }}</option>
+                        {% endfor %}
+                    </select>
+                                     
+                    <!-- Segundo combo box -->
+                    <select class="form-control" id="Tipo" name="Tipo">
+                    </select>
+                    
+                    <!-- Tercer combo box -->
+                    <select class="form-control" id="FechaPublicacion" name="FechaPublicacion">
+                    </select>
+                    
+                    <!-- Cuarto combo box -->
+                    <select class="form-control" id="NombreProvidencia" name="NombreProvidencia">           
+                    </select>
+                    
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 text-center">
+                        <button id="consultar" class="btn btn-primary">Consultar</button>
+                        <br><br>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 text-center">
+                      
+                    </div>
+                </div>
+                <div class="form-group row card card-body">
+                    <table id="tablaDocumentos" border="1">
+                        <thead>
+                            <tr>
+                                <th>Nombre Providencia</th>
+                                <th>Tipo</th>
+                                <th>Año Publicación</th>                          
+                                <th>Fecha Publicación</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaBody">
+                            <!-- Aquí se agregarán las filas -->
+                        </tbody>
+                    </table>
+                    <table id="tablaDocumentos1" border="1">
+                        <thead>
+                            <tr>
+                                <th>texto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaBody1">
+                            <!-- Aquí se agregarán las filas -->
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+
+            <!-- Formulario debajo -->
             <form action="/tasks/create/" method="POST" class="card card-body">
                 <h1>Create task</h1>
                 {{error}}
@@ -14,4 +87,167 @@
         </div>
     </div>
 </main>
+
+<script>
+$(document).ready(function() {
+    // Manejar el evento de cambio en el primer combo box
+    $('#AnoPublicacion').on('change', function() {
+        // Obtener el valor seleccionado del primer combo box
+        var seleccion = $(this).val();
+
+        // Realizar una solicitud AJAX para obtener los datos correspondientes
+        $.ajax({
+            url: '/cargartipo/',  // URL de la vista que proporciona los datos
+            method: 'GET',
+            data: {'seleccion': seleccion},  // Pasar el valor seleccionado como parámetro
+            success: function(data) {
+                // Limpiar el segundo combo box
+                $('#Tipo').empty();
+
+                $('#Tipo').append($('<option>', {
+                    value: '', // Valor vacío
+                    text: ''   // Texto vacío
+                }));
+
+                // Agregar la opción al segundo combo box basada en el dato recibido
+                for (var i = 0; i < data.length; i++) {
+                    // Se asume que el valor del campo 'Tipo' es el mismo que el texto de la opción
+                    $('#Tipo').append($('<option>', {
+                        value: data[i], // Usar el mismo valor que el texto
+                        text: data[i]   // Usar el mismo texto
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                // Manejar errores de la solicitud AJAX
+                console.error('Error al obtener los datos:', error);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    // Manejar el evento de cambio en el primer combo box
+    $('#Tipo').on('change', function() {
+        // Obtener el valor seleccionado del primer combo box
+        var tipo = $(this).val();
+        var ano = $('#AnoPublicacion').val();
+
+        // Realizar una solicitud AJAX para obtener los datos correspondientes
+        $.ajax({
+            url: '/cargarfecha/',  // URL de la vista que proporciona los datos
+            method: 'GET',
+            data: {'ano': ano, 'tipo':tipo},  // Pasar el valor seleccionado como parámetro
+            success: function(data) {
+                // Limpiar el segundo combo box
+                $('#FechaPublicacion').empty();
+
+                $('#FechaPublicacion').append($('<option>', {
+                    value: '', // Valor vacío
+                    text: ''   // Texto vacío
+                }));
+
+                // Agregar la opción al segundo combo box basada en el dato recibido
+                for (var i = 0; i < data.length; i++) {
+                    // Se asume que el valor del campo 'Tipo' es el mismo que el texto de la opción
+                    $('#FechaPublicacion').append($('<option>', {
+                        value: data[i], // Usar el mismo valor que el texto
+                        text: data[i]   // Usar el mismo texto
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                // Manejar errores de la solicitud AJAX
+                console.error('Error al obtener los datos:', error);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    // Manejar el evento de cambio en el primer combo box
+    $('#FechaPublicacion').on('change', function() {
+        // Obtener el valor seleccionado del primer combo box
+        var fecha = $(this).val();
+        var tipo = $('#Tipo').val();
+        var ano = $('#AnoPublicacion').val();
+        
+
+        // Realizar una solicitud AJAX para obtener los datos correspondientes
+        $.ajax({
+            url: '/cargarprovincia/',  // URL de la vista que proporciona los datos
+            method: 'GET',
+            data: {'ano': ano, 'tipo':tipo, 'fecha':fecha},  // Pasar el valor seleccionado como parámetro
+            success: function(data) {
+                // Limpiar el segundo combo box
+                $('#NombreProvidencia').empty();
+
+                $('#NombreProvidencia').append($('<option>', {
+                    value: '', // Valor vacío
+                    text: ''   // Texto vacío
+                }));
+
+                // Agregar la opción al segundo combo box basada en el dato recibido
+                for (var i = 0; i < data.length; i++) {
+                    // Se asume que el valor del campo 'Tipo' es el mismo que el texto de la opción
+                    $('#NombreProvidencia').append($('<option>', {
+                        value: data[i], // Usar el mismo valor que el texto
+                        text: data[i]   // Usar el mismo texto
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                // Manejar errores de la solicitud AJAX
+                console.error('Error al obtener los datos:', error);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $('#consultar').on('click', function() {
+        var provincia = $('#NombreProvidencia').val();
+        // Realizar una solicitud AJAX para obtener los datos de los documentos
+        $.ajax({
+            url: '/cargarconsulta/',  // URL de la vista que proporciona los datos
+            method: 'GET',
+            data: {'seleccion': provincia}, 
+            success: function(data) {
+                // Limpiar el cuerpo de la tabla antes de agregar nuevas filas
+                $('#tablaBody').empty();
+                $('#tablaBody1').empty();
+
+                // Iterar sobre los datos recibidos y agregar una fila por cada documento
+                data.forEach(function(documento) {
+                    // Crear una nueva fila
+                    var fila = $('<tr>');
+
+                    // Agregar las celdas con los datos del documento
+                    fila.append($('<td>').text(documento.NombreProvidencia));
+                    fila.append($('<td>').text(documento.Tipo));
+                    fila.append($('<td>').text(documento.AnoPublicacion));                    
+                    fila.append($('<td>').text(documento.FechaPublicacion));
+
+                    // Agregar la fila a la tabla
+                    $('#tablaBody').append(fila);
+
+
+                    var fila = $('<tr>');
+
+                    // Agregar las celdas con los datos del documento                 
+                    fila.append($('<td>').text(documento.Texto));
+
+                    $('#tablaBody1').append(fila);
+                });
+            },
+            error: function(xhr, status, error) {
+                // Manejar errores de la solicitud AJAX
+                console.error('Error al obtener los datos:', error);
+            }
+        });
+    });
+});
+
+</script>
+
 {% endblock %}
